@@ -16,7 +16,7 @@ param emissionRegions string = '["westeurope","northeurope","norwayeast"]'
 
 @description('The ElectricityMaps API key.')
 @secure()
-param emToken string
+param emToken string = newGuid()
 
 var regionShortNames = {
   westeurope: 'weu'
