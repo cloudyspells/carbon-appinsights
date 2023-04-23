@@ -1,0 +1,11 @@
+{
+    "analyzers": {
+        "core": {
+            "rules": {
+                "simplify-interpolation": {
+                    "level": "off"
+                }
+            }
+        }
+    }
+}

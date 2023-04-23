@@ -164,7 +164,7 @@ resource funcApp 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'REGIONS'
-          value: emissionRegions
+          value: '${emissionRegions}'
         }
       ]
     }
