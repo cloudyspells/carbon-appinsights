@@ -1,0 +1,74 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/base
+{
+	"name": "AzureCloudySpells",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/powershell:1": {
+			"version": "latest",
+            "modules": [
+                "Pester",
+                "PSScriptAnalyzer",
+                "Az",
+                "Az.Resources",
+				"PlatyPS"
+            ]
+		},
+    	"ghcr.io/devcontainers/features/azure-cli:1": {
+      		"version": "latest",
+            "installBicep": true
+    	}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "bundle install;jekyll --version",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"davidanson.vscode-markdownlint",
+                "ms-azuretools.vscode-azurefunctions",
+                "ms-azuretools.vscode-azureresourcegroups",
+				"ms-azuretools.vscode-bicep",
+                "ms-vscode.azure-account",
+                "ms-vscode.powershell",
+                "ms-vscode-remote.remote-containers",
+                "ms-vscode-remote.azurecli",
+                "msazurermtools.azurerm-vscode-tools",
+                "codezombiech.gitignore",
+                "waderyan.gitblame",
+                "github.remotehub",
+                "cschleiden.vscode-github-actions",
+                "redhat.vscode-yaml",
+                "github.vscode-pull-request-github",
+                "pspester.pester-test"
+			],
+			"settings": {
+				"dotnetAcquisitionExtension.existingDotnetPath": [
+					"/usr/bin/dotnet"
+				],
+				"editor.rulers": [80,100,120]
+			}
+		}
+	},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "vscode",
+	// "runArgs": ["--userns=keep-id"],
+  	"containerUser": "vscode", // the value needs to match the value of "remoteUser"
+	"containerEnv": {
+		"HOME": "/home/vscode"
+	}
+}

@@ -1,0 +1,56 @@
+# File: .github/workflows/deploy-bicep.yml
+
+on:
+  workflow_dispatch:
+  
+name: Deploy Bicep code
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+      security-events: write
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Azure CLI login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Run bicep deployment
+      uses: azure/arm-deploy@v1
+      id: arm-deploy
+      with:
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        scope: subscription
+        region: 'westeurope'
+        template: src/bicep/main.bicep
+        parameters: src/bicep/main.parameters.json emToken=${{ secrets.EMTOKEN }}
+
+    # - name: Install PowerShell Modules
+    #   run: |
+    #     Set-PSRepository PSGallery -InstallationPolicy Trusted
+    #     New-Item -ItemType Directory -Path ./Modules
+    #     Save-Module -Name Az.Accounts -Path ./Modules -Repository PSGallery
+    #     Save-Module -Name Az.Resources -Path ./Modules -Repository PSGallery
+    #     Save-Module -Name Az.Cdn -Path ./Modules -Repository PSGallery
+    #     Save-Module -Name PSWattTime -Path ./Modules -Repository PSGallery
+    #   shell: pwsh
+    #   working-directory: ./src/CarbonSchedulerFunctionApp
+
+    - name: Zip azure function
+      run: zip -r ../../function.zip ./
+      shell: bash
+      working-directory: ./src/carbon-appinsights
+
+    - name: Deploy function code
+      run: |
+        az functionapp deployment source config-zip --src ./function.zip \
+          --name ${{ steps.arm-deploy.outputs.functionAppName }} \
+          --resource-group ${{ steps.arm-deploy.outputs.functionAppResourceGroup }} \
+          --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
