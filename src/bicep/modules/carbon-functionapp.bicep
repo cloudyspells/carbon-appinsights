@@ -33,7 +33,7 @@ param emToken string
 param keyVaultName string
 
 @description('Azure regions to get emissions for as JSON array of strings')
-param emissionRegions string = '["westeurope","northeurope","norwayeast"]'
+param emissionRegions string = '"westeurope","northeurope","norwayeast"'
 
 var storageConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${functionAppStorageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${functionAppStorageAccount.listKeys().keys[0].value}'
 
@@ -164,7 +164,7 @@ resource funcApp 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'REGIONS'
-          value: '${emissionRegions}'
+          value: '[${emissionRegions}]'
         }
       ]
     }

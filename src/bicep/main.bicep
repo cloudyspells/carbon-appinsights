@@ -12,7 +12,7 @@ param environment string = 'dev'
 param location string = 'westeurope'
 
 @description('Azure regions to get emissions for as JSON array of strings')
-param emissionRegions string = '["westeurope","norwayeast","northeurope"]'
+param emissionRegions string = '"westeurope","norwayeast","northeurope"'
 
 @description('The ElectricityMaps API key.')
 @secure()
@@ -52,7 +52,7 @@ module functionApp 'modules/carbon-functionapp.bicep' = {
     keyVaultName: keyVaultName
     location: location
     emToken: emToken
-    emissionRegions: '${emissionRegions}'
+    emissionRegions: emissionRegions
   }
 }
 
