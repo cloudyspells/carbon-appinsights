@@ -118,6 +118,7 @@ resource funcApp 'Microsoft.Web/sites@2022-03-01' = {
   }
   properties: {
     httpsOnly: true
+    clientAffinityEnabled: false
     serverFarmId: functionAppServicePlan.id
     siteConfig: {
       ftpsState: 'Disabled'

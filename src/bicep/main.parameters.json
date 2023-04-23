@@ -6,7 +6,7 @@
   },
   "parameters": {
     "projectName": {
-      "value": "carbon-insights"
+      "value": "co2-insights"
     },
     "environment": {
       "value": "dev"
