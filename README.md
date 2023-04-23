@@ -38,3 +38,26 @@ configured in your forked repository from the file
 
 To configure your own deployment, you will need to edit the
 `src/bicep/main.parameters.json` with your own desired configuration.
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+|`projectName`|`string`|`carbon-appinsights`|The name of the project. Used in naming resources|
+|`environment`|`string`|`dev`|The name of the environment. Used in naming resources|
+|`location`|`string`|`westeurope`|The Azure region to deploy the resources to|
+|`emToken`|`securestring`|`null`|The ElectricityMaps API token. Should be specified in cmdline with env var|
+|`emissionRegions`|`string`|"westeurope","norwayeast","northeurope"|The list of regions to log emissions data for|
+
+### Deployed resources
+
+The following resources are deployed by the bicep template:
+
+| Type | Description |
+| --- | --- |
+|KeyVault|A KeyVault to store the ElectricityMaps API key|
+|FunctionApp|An Azure Function App to run the PowerShell function|
+|ApplicationInsights|An Application Insights instance to log the emissions data|
+|LogAnalyticsWorkspace|A Log Analytics workspace to store the emissions data|
+|StorageAccount|A Storage Account to store the Function App code|
+|AppServicePlan|An App Service Plan to host the Function App|

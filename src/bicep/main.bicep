@@ -11,7 +11,7 @@ param environment string = 'dev'
 @description('The location for the Carbon control Function App.')
 param location string = 'westeurope'
 
-@description('Azure regions to get emissions for as JSON array of strings')
+@description('Azure regions to get emissions for as comma seperated array of double-quoted strings')
 param emissionRegions string = '"westeurope","norwayeast","northeurope"'
 
 @description('The ElectricityMaps API key.')

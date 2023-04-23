@@ -32,7 +32,7 @@ param emToken string
 @description('The name of the Azure Key Vault to store the ElectricityMaps API credentials')
 param keyVaultName string
 
-@description('Azure regions to get emissions for as JSON array of strings')
+@description('Azure regions to get emissions for as array of double-quoted strings')
 param emissionRegions string = '"westeurope","northeurope","norwayeast"'
 
 var storageConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${functionAppStorageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${functionAppStorageAccount.listKeys().keys[0].value}'
