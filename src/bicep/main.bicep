@@ -9,10 +9,14 @@ param projectName string = 'carbon-appsights'
 param environment string = 'dev'
 
 @description('The location for the Carbon control Function App.')
-param functionAppLocation string = 'westeurope'
+param location string = 'westeurope'
 
 @description('Azure regions to get emissions for as JSON array of strings')
 param emissionRegions string = '["westeurope","northeurope","norwayeast"]'
+
+@description('The ElectricityMaps API key.')
+@secure()
+param emToken string
 
 var regionShortNames = {
   westeurope: 'weu'
@@ -20,12 +24,7 @@ var regionShortNames = {
   norwayeast: 'noe'
   francecentral: 'frc'
 }
-
-@description('The ElectricityMaps API key.')
-@secure()
-param emToken string
-
-var funcAppNameConvention = '${regionShortNames[functionAppLocation]}-${projectName}-${environment}'
+var funcAppNameConvention = '${regionShortNames[location]}-${projectName}-${environment}'
 var functionAppName = 'func-${funcAppNameConvention}'
 var functionAppServicePlanName = 'plan-${funcAppNameConvention}'
 var functionAppResourceGroupName = 'rg-${funcAppNameConvention}-funcapp'
@@ -35,7 +34,7 @@ var keyVaultName = 'kv-${funcAppNameConvention}'
 // deploy the global function app resource group
 resource rgFunctionApp 'Microsoft.Resources/resourceGroups@2020-06-01' = {
   name: functionAppResourceGroupName
-  location: functionAppLocation
+  location: location
   tags: {
     environment: environment
     projectName: projectName
@@ -43,7 +42,7 @@ resource rgFunctionApp 'Microsoft.Resources/resourceGroups@2020-06-01' = {
 }
 
 // deploy the global function app
-module functionApp 'modules/carbon-scheduling-function.bicep' = {
+module functionApp 'modules/carbon-functionapp.bicep' = {
   name: 'deploy-functionApp'
   scope: rgFunctionApp
   params: {
@@ -51,9 +50,8 @@ module functionApp 'modules/carbon-scheduling-function.bicep' = {
     functionAppServicePlanName: functionAppServicePlanName
     functionAppStorageAccountPrefix: functionAppStorageAccountPrefix
     keyVaultName: keyVaultName
-    location: functionAppLocation
+    location: location
     emToken: emToken
-    keyVaulName: keyVaultName
     emissionRegions: emissionRegions
   }
 }
