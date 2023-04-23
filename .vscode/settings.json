@@ -1,0 +1,7 @@
+{
+    "azureFunctions.templateFilter": "Core",
+    "azureFunctions.deploySubpath": "src\\carbon-appinsights",
+    "azureFunctions.projectLanguage": "PowerShell",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen"
+}
