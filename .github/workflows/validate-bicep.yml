@@ -31,7 +31,14 @@ jobs:
           modules: PSRule.Rules.Azure
           inputType: repository
           outputFormat: Sarif
+          outputPath: ./psrule.sarif
           outcome: Processed
+
+      - name: Upload PSRule SARIF results
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: psrule.sarif
 
       - name: Build Bicep
         run: bicep build src/bicep/main.bicep

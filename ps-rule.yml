@@ -1,0 +1,41 @@
+# Description: Configuration for PSRule
+configuration:
+  AZURE_PARAMETER_FILE_EXPANSION: true
+
+input:
+  format: 'File'
+  pathIgnore:
+  - '.git/**'
+  - '.github/**'
+  - '.vscode/*'
+  - 'bicepconfig.json'
+  - 'src/bicep/modules/**'
+  - 'src/carbon-appinsights/**'
+  - '.cz-config.js'
+  - 'docs/**'
+
+output:
+  as: Detail
+  encoding: Default
+  format: Sarif
+  jsonIndent: 0
+  outcome: Processed
+  style: Detect
+  sarifProblemsOnly: true
+  path: ./psrule.sarif
+
+execution:
+  notProcessedWarning: false
+
+rule:
+  exclude:
+  - Azure.AppService.AlwaysOn
+  - Azure.KeyVault.PurgeProtect
+  - Azure.KeyVault.SoftDelete
+  - Azure.KeyVault.Firewall
+  - Azure.KeyVault.Logs
+  - Azure.Storage.BlobPublicAccess
+  - Azure.Storage.Firewall
+  - Azure.Storage.SoftDelete
+  - Azure.Storage.ContainerSoftDelete
+  - Azure.Storage.UseReplication
