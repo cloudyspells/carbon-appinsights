@@ -28,6 +28,7 @@ var funcAppNameConvention = '${regionShortNames[location]}-${projectName}-${envi
 var functionAppName = 'func-${funcAppNameConvention}'
 var functionAppServicePlanName = 'plan-${funcAppNameConvention}'
 var functionAppResourceGroupName = 'rg-${funcAppNameConvention}-funcapp'
+var logWorkspaceName = 'log-${funcAppNameConvention}'
 var functionAppStorageAccountPrefix = 'sacloudy'
 var keyVaultName = substring('kv-${funcAppNameConvention}', 0, 23)
 

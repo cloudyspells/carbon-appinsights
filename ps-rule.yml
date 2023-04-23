@@ -39,3 +39,4 @@ rule:
   - Azure.Storage.SoftDelete
   - Azure.Storage.ContainerSoftDelete
   - Azure.Storage.UseReplication
+  - Azure.Resource.UseTags

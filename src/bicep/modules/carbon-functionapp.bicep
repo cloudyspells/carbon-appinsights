@@ -86,12 +86,25 @@ resource functionAppStorageAccount 'Microsoft.Storage/storageAccounts@2019-06-01
 }
 
 // Deploy an application insights instance for the function app
-resource functionAppInsights 'Microsoft.Insights/components@2018-05-01-preview' = {
+resource functionAppInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: replace(functionAppName, 'func-', 'ai-')
   location: location
   kind: 'web'
   properties: {
     Application_Type: 'web'
+    WorkspaceResourceId: logAnalyticsWorkspace.id
+  }
+}
+
+// Deploy a log analytics workspace for the application insights instance
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+  name: replace(functionAppName, 'func-', 'log-')
+  location: location
+  properties: {
+    sku: {
+      name: 'PerGB2018'
+    }
+    retentionInDays: 30
   }
 }
 
@@ -109,6 +122,7 @@ resource funcApp 'Microsoft.Web/sites@2022-03-01' = {
     siteConfig: {
       ftpsState: 'Disabled'
       minTlsVersion: '1.2'
+      http20Enabled: true
       netFrameworkVersion: 'v6.0'
       appSettings: [
         {
