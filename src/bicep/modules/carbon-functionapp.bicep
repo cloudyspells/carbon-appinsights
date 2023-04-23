@@ -92,7 +92,6 @@ resource functionAppInsights 'Microsoft.Insights/components@2018-05-01-preview' 
   kind: 'web'
   properties: {
     Application_Type: 'web'
-    ApplicationId: functionAppName
   }
 }
 
