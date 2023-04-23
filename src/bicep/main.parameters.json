@@ -13,9 +13,6 @@
     },
     "location": {
       "value": "westeurope"
-    },
-    "emissionRegions": {
-      "value": "[\"westeurope\",\"norwayeast\",\"northeurope\"]"
     }
   }
 }
