@@ -29,7 +29,7 @@ var functionAppName = 'func-${funcAppNameConvention}'
 var functionAppServicePlanName = 'plan-${funcAppNameConvention}'
 var functionAppResourceGroupName = 'rg-${funcAppNameConvention}-funcapp'
 var functionAppStorageAccountPrefix = 'sacloudy'
-var keyVaultName = 'kv-${funcAppNameConvention}'
+var keyVaultName = substring('kv-${funcAppNameConvention}', 0, 23)
 
 // deploy the global function app resource group
 resource rgFunctionApp 'Microsoft.Resources/resourceGroups@2020-06-01' = {
