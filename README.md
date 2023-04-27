@@ -13,6 +13,8 @@ The function is triggered by a timer every 20 minutes. The function will log
 a metric `{region}CarbonIntensity` for each region in the configured list of
 regions. The metric value is the carbon intensity in grams of CO2 per kWh.
 
+![Example AppInsights Dashboard](./docs/images/log-weu-co2-insights-dev.png)
+
 ### Usage
 
 This function is designed to be deployed to Azure as a Function App with the
