@@ -18,9 +18,11 @@ regions. The metric value is the carbon intensity in grams of CO2 per kWh.
 ### Usage
 
 This function is designed to be deployed to Azure as a Function App with the
-included _GitHub Workflow_ using bicep. To deploy the function, you will need
-fork this repository and create a new GitHub repository secret named
-`AZURE_CREDENTIALS` with the value of the output from the following command:
+included _GitHub Workflow_ using bicep. See [the local guide](docs/usage-local.md)
+for instructions your local workstation.
+To deploy the function, you will need fork this repository and create a new
+GitHub repository secret named `AZURE_CREDENTIALS` with the value of the output
+from the following command:
 
 ```bash
 az ad sp create-for-rbac --name "CarbonAppInsights" --sdk-auth --role contributor --scopes /subscriptions/<SUBSCRIPTION_ID>
