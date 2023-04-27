@@ -32,6 +32,7 @@ Then create a new parameters json file with the following content:
     }
   }
 }
+```
 
 Adapt the parameters to your own needs. Specifically the `emissionRegions`
 parameter as that sets the Azure regions to be polled for emissions.
